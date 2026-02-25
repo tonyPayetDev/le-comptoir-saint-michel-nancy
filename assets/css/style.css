@@ -1,24 +1,27 @@
 /* =========================================
    Le Comptoir Saint Michel - Nancy
-   Style principal
+   Design : Noir & Blanc élégant, Bistrot français
+   Palette : #000000 / #ffffff / rouge #3197bd
    ========================================= */
 
 /* --- Variables & Reset --- */
 :root {
   --primary: #000000;
-  --secondary: #f5a623;
-  --secondary-dark: #d4881a;
+  --secondary: #ffffff;
+  --gold: #3197bd;
+  --gold-dark: #1e7aa3;
   --white: #ffffff;
-  --off-white: #f9f6f1;
-  --light-gray: #e8e4df;
+  --off-white: #f5f5f5;
+  --light-gray: #e5e5e5;
   --dark-gray: #1a1a1a;
   --mid-gray: #666666;
   --text-dark: #1a1a1a;
   --font-main: 'Poppins', sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
   --transition: 0.3s ease;
   --shadow: 0 4px 24px rgba(0,0,0,0.15);
   --shadow-lg: 0 8px 48px rgba(0,0,0,0.25);
-  --radius: 4px;
+  --radius: 2px;
 }
 
 *, *::before, *::after {
@@ -60,6 +63,7 @@ ul {
 h1, h2, h3, h4 {
   font-weight: 700;
   line-height: 1.2;
+  font-family: var(--font-heading);
 }
 
 h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
@@ -71,9 +75,10 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--gold);
   display: block;
   margin-bottom: 0.75rem;
+  font-family: var(--font-main);
 }
 
 /* --- Buttons --- */
@@ -94,13 +99,16 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
 }
 
 .btn-primary {
-  background: var(--secondary);
+  background: var(--gold);
   color: var(--primary);
+  border: 2px solid var(--gold);
 }
 .btn-primary:hover {
-  background: var(--secondary-dark);
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245,166,35,0.35);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 .btn-outline {
@@ -119,7 +127,9 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   border: 2px solid var(--primary);
 }
 .btn-dark:hover {
-  background: var(--dark-gray);
+  background: var(--gold);
+  color: var(--primary);
+  border-color: var(--gold);
   transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
@@ -199,7 +209,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   left: 0.75rem;
   right: 0.75rem;
   height: 2px;
-  background: var(--secondary);
+  background: var(--gold);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -211,7 +221,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
 
 .nav-menu a:hover,
 .nav-menu a.active {
-  color: var(--secondary);
+  color: var(--gold);
 }
 
 .nav-cta {
@@ -230,7 +240,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   opacity: 0.85;
   transition: var(--transition);
 }
-.nav-phone:hover { opacity: 1; color: var(--secondary); }
+.nav-phone:hover { opacity: 1; color: var(--gold); }
 .nav-phone svg { width: 14px; height: 14px; }
 
 /* Mobile hamburger */
@@ -238,21 +248,34 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   display: none;
   flex-direction: column;
   gap: 5px;
-  background: none;
-  border: none;
+  background: rgba(0,0,0,0.35);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 4px;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  position: relative;
+  z-index: 1001;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.nav-toggle:hover {
+  background: rgba(49,151,189,0.3);
+  border-color: var(--gold);
 }
 .nav-toggle span {
   display: block;
-  width: 24px;
-  height: 2px;
+  width: 26px;
+  height: 2.5px;
   background: var(--white);
+  border-radius: 2px;
   transition: var(--transition);
 }
-.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle.active span:nth-child(2) { opacity: 0; }
-.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-toggle.active {
+  background: rgba(49,151,189,0.2);
+  border-color: var(--gold);
+}
+.nav-toggle.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
 /* =========================================
    HERO SECTION
@@ -317,16 +340,17 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(245,166,35,0.15);
-  border: 1px solid rgba(245,166,35,0.4);
-  color: var(--secondary);
+  background: rgba(49,151,189,0.15);
+  border: 1px solid rgba(49,151,189,0.5);
+  color: var(--gold);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   padding: 0.4rem 1rem;
-  border-radius: 50px;
+  border-radius: 2px;
   margin-bottom: 1.5rem;
+  font-family: var(--font-main);
 }
 
 .hero-text h1 {
@@ -354,9 +378,9 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   left: 0;
   right: 0;
   z-index: 10;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.88);
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(245,166,35,0.3);
+  border-top: 1px solid rgba(49,151,189,0.35);
 }
 
 .hero-info-inner {
@@ -380,7 +404,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
 .hero-info-item svg {
   width: 16px;
   height: 16px;
-  color: var(--secondary);
+  color: var(--gold);
   flex-shrink: 0;
 }
 .hero-info-item strong {
@@ -407,7 +431,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
   transition: var(--transition);
 }
 .hero-dot.active {
-  background: var(--secondary);
+  background: var(--gold);
   width: 24px;
   border-radius: 4px;
 }
@@ -445,8 +469,8 @@ section {
 /* Divider */
 .divider {
   width: 48px;
-  height: 3px;
-  background: var(--secondary);
+  height: 2px;
+  background: var(--gold);
   margin-top: 1rem;
 }
 .centered .divider {
@@ -508,10 +532,10 @@ section {
   position: absolute;
   bottom: -1rem;
   right: -1rem;
-  background: var(--secondary);
+  background: var(--gold);
   color: var(--primary);
   padding: 1.25rem;
-  border-radius: 8px;
+  border-radius: 2px;
   text-align: center;
   font-weight: 700;
   box-shadow: var(--shadow);
@@ -552,8 +576,8 @@ section {
   gap: 0.75rem;
   padding: 1rem;
   background: var(--off-white);
-  border-radius: 6px;
-  border-left: 3px solid var(--secondary);
+  border-radius: 0;
+  border-left: 3px solid var(--gold);
 }
 
 .bistrot-feature-icon {
@@ -593,7 +617,7 @@ section {
 }
 
 .horaires-title {
-  color: var(--secondary);
+  color: var(--gold);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -614,7 +638,7 @@ section {
 .horaire-item h4 {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--secondary);
+  color: var(--gold);
   margin-bottom: 0.35rem;
 }
 .horaire-item p {
@@ -626,7 +650,8 @@ section {
    PRIVATISATIONS SECTION
    ========================================= */
 #privatisations {
-  background: var(--off-white);
+  background: var(--primary);
+  color: var(--white);
 }
 
 .priv-grid {
@@ -683,8 +708,11 @@ section {
   object-fit: cover;
 }
 
+.priv-content h2 {
+  color: var(--white);
+}
 .priv-content p {
-  color: var(--mid-gray);
+  color: rgba(255,255,255,0.72);
   font-size: 1rem;
   line-height: 1.8;
   margin-bottom: 2rem;
@@ -701,26 +729,27 @@ section {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  background: var(--white);
-  border: 1.5px solid var(--light-gray);
-  color: var(--text-dark);
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
   font-size: 0.82rem;
   font-weight: 500;
   padding: 0.45rem 0.9rem;
-  border-radius: 50px;
+  border-radius: 2px;
   transition: var(--transition);
 }
 .priv-tag:hover {
-  border-color: var(--secondary);
-  color: var(--secondary);
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(49,151,189,0.08);
 }
 
 /* =========================================
    LIEU SECTION
    ========================================= */
 #lieu {
-  background: var(--primary);
-  color: var(--white);
+  background: var(--off-white);
+  color: var(--text-dark);
 }
 
 .lieu-grid {
@@ -730,15 +759,15 @@ section {
   align-items: center;
 }
 
-.lieu-content .section-label { color: var(--secondary); }
+.lieu-content .section-label { color: var(--gold); }
 
 .lieu-content h2 {
-  color: var(--white);
+  color: var(--text-dark);
   margin-bottom: 1.5rem;
 }
 
 .lieu-content p {
-  color: rgba(255,255,255,0.75);
+  color: var(--mid-gray);
   font-size: 1rem;
   line-height: 1.8;
   margin-bottom: 2rem;
@@ -756,18 +785,25 @@ section {
   align-items: flex-start;
   gap: 0.75rem;
   padding: 1rem 1.25rem;
-  background: rgba(255,255,255,0.07);
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--white);
+  border-radius: 0;
+  border: 1px solid var(--light-gray);
   transition: var(--transition);
 }
 .lieu-info-item:hover {
-  background: rgba(245,166,35,0.1);
-  border-color: rgba(245,166,35,0.3);
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.lieu-info-item:hover h4,
+.lieu-info-item:hover p {
+  color: var(--white) !important;
+}
+.lieu-info-item:hover .lieu-info-icon svg {
+  color: var(--gold);
 }
 
 .lieu-info-icon {
-  color: var(--secondary);
+  color: var(--gold);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -777,15 +813,16 @@ section {
 }
 
 .lieu-info-item h4 {
-  color: var(--secondary);
+  color: var(--gold);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 0.3rem;
+  font-family: var(--font-main);
 }
 .lieu-info-item p {
-  color: rgba(255,255,255,0.75);
+  color: var(--mid-gray);
   font-size: 0.87rem;
   margin: 0;
   line-height: 1.5;
@@ -811,18 +848,20 @@ section {
   position: absolute;
   bottom: -1.5rem;
   left: -1.5rem;
-  background: var(--secondary);
-  color: var(--primary);
+  background: var(--primary);
+  color: var(--white);
   padding: 1.25rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 0;
   font-weight: 700;
   box-shadow: var(--shadow-lg);
   max-width: 200px;
+  border-left: 3px solid var(--gold);
 }
 .lieu-map-card .addr-line {
   font-size: 0.85rem;
   font-weight: 600;
   display: block;
+  color: var(--white);
 }
 .lieu-map-card .addr-sub {
   font-size: 0.75rem;
@@ -835,6 +874,7 @@ section {
    ========================================= */
 #decouvrir {
   background: var(--white);
+  border-top: 1px solid var(--light-gray);
 }
 
 .decouvrir-intro {
@@ -851,16 +891,18 @@ section {
 }
 
 .decouvrir-card {
-  background: var(--off-white);
-  border-radius: 12px;
+  background: var(--white);
+  border-radius: 0;
   overflow: hidden;
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--light-gray);
 }
 .decouvrir-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
+  border-color: var(--gold);
 }
 
 .decouvrir-card-img {
@@ -889,8 +931,9 @@ section {
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--gold);
   margin-bottom: 0.6rem;
+  font-family: var(--font-main);
 }
 
 .decouvrir-card-body h3 {
@@ -922,7 +965,7 @@ section {
   height: 14px;
   transition: transform 0.3s ease;
 }
-.card-link:hover { color: var(--secondary); }
+.card-link:hover { color: var(--gold); }
 .card-link:hover svg { transform: translateX(4px); }
 
 .decouvrir-cta {
@@ -933,8 +976,9 @@ section {
    VALEURS BANNER
    ========================================= */
 .valeurs-banner {
-  background: var(--secondary);
+  background: var(--primary);
   padding: 3.5rem 0;
+  border-top: 2px solid var(--gold);
 }
 
 .valeurs-grid {
@@ -960,15 +1004,17 @@ section {
 .valeur-item h4 {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--white);
   margin-bottom: 0.35rem;
+  font-family: var(--font-main);
 }
 
 .valeur-item p {
   font-size: 0.8rem;
-  color: rgba(0,0,0,0.65);
+  color: rgba(255,255,255,0.55);
   line-height: 1.5;
 }
+
 
 /* =========================================
    GALERIE STRIP
@@ -1042,8 +1088,8 @@ footer {
   transition: var(--transition);
 }
 .footer-social a:hover {
-  background: var(--secondary);
-  border-color: var(--secondary);
+  background: var(--gold);
+  border-color: var(--gold);
   color: var(--primary);
 }
 .footer-social a svg { width: 16px; height: 16px; }
@@ -1065,7 +1111,7 @@ footer {
   left: 0;
   width: 28px;
   height: 2px;
-  background: var(--secondary);
+  background: var(--gold);
 }
 
 .footer-links li {
@@ -1080,7 +1126,7 @@ footer {
   gap: 0.4rem;
 }
 .footer-links a:hover {
-  color: var(--secondary);
+  color: var(--gold);
   padding-left: 4px;
 }
 
@@ -1098,7 +1144,7 @@ footer {
 .footer-contact-item svg {
   width: 16px;
   height: 16px;
-  color: var(--secondary);
+  color: var(--gold);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -1109,7 +1155,7 @@ footer {
 .footer-contact-item a {
   color: rgba(255,255,255,0.6);
 }
-.footer-contact-item a:hover { color: var(--secondary); }
+.footer-contact-item a:hover { color: var(--gold); }
 
 .footer-bottom {
   max-width: 1200px;
@@ -1136,7 +1182,7 @@ footer {
   color: rgba(255,255,255,0.4);
   transition: var(--transition);
 }
-.footer-bottom-links a:hover { color: var(--secondary); }
+.footer-bottom-links a:hover { color: var(--gold); }
 
 /* =========================================
    RESERVATION FLOATING BTN
@@ -1149,14 +1195,14 @@ footer {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: var(--secondary);
+  background: var(--gold);
   color: var(--primary);
   font-family: var(--font-main);
   font-size: 0.85rem;
   font-weight: 700;
   padding: 0.85rem 1.5rem;
-  border-radius: 50px;
-  box-shadow: 0 4px 24px rgba(245,166,35,0.45);
+  border-radius: 2px;
+  box-shadow: 0 4px 24px rgba(49,151,189,0.45);
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -1164,16 +1210,17 @@ footer {
   animation: fab-pulse 2.5s ease infinite;
 }
 .reservation-fab:hover {
-  background: var(--secondary-dark);
+  background: var(--primary);
+  color: var(--white);
   transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(245,166,35,0.5);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
   animation: none;
 }
 .reservation-fab svg { width: 18px; height: 18px; }
 
 @keyframes fab-pulse {
-  0%, 100% { box-shadow: 0 4px 24px rgba(245,166,35,0.45); }
-  50% { box-shadow: 0 4px 40px rgba(245,166,35,0.65); }
+  0%, 100% { box-shadow: 0 4px 24px rgba(49,151,189,0.35); }
+  50% { box-shadow: 0 6px 32px rgba(49,151,189,0.6); }
 }
 
 /* =========================================
